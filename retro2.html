@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Planilla de Empleados</title>
+</head>
+<body>
+    <script type="text/JavaScript">
+        var si, i, d, sf, n, uniDesc, salarioTotal = 0, totalDes = 0, totalUni = 0, total_gerentes = 0, total_otros = 0;
+        var num_empleados = prompt('Digite el número de empleados', '');
+
+        document.write('<b>PLANILLA DE EMPLEADOS</b><br><br>');
+        document.write('<table border=1>');
+        document.write('<tr><td>Número empleado</td><td>Nombre empleado</td><td>Salario inicial</td><td>Descuento</td><td>Descuento por uniforme</td><td>Salario final</td></tr>');
+
+        for (i = 1; i <= num_empleados; i++) {
+            n = prompt('Digite el nombre del empleado número ' + i + '');
+            do {
+                si = parseFloat(prompt('Digite el salario inicial del empleado (mínimo $356)', ''));
+            } while (si < 356);
+
+            d = si * 0.05;
+            totalDes  += d;
+
+            if (n.toLowerCase().includes("gerente")) {
+                uniDesc = 50;
+                total_gerentes++;
+            } else {
+                uniDesc = 25;
+                total_otros++;
+            }
+
+            totalUni  += uniDesc;
+
+            sf = si - d - uniDesc;
+            salarioTotal += sf;
+
+            document.write('<tr><td>' + i + '</td><td>' + n + '</td><td>$' + si.toFixed(2) + '</td><td>$' + d.toFixed(2) + '</td><td>$' + uniDesc.toFixed(2) + '</td><td>$' + sf.toFixed(2) + '</td></tr>');
+        }
+
+        document.write('</table>');
+        document.write('<br><b>Registros:</b><br>');
+        document.write('Monto total pagado en concepto de salarios: $' + salarioTotal.toFixed(2) + '<br>');
+        document.write('Monto total en concepto de descuentos: $' + totalDes .toFixed(2) + '<br>');
+        document.write('Monto total en concepto de descuentos por uniforme: $' + totalUni .toFixed(2) + '<br>');
+        document.write('Cantidad de gerentes: ' + total_gerentes + '<br>');
+        document.write('Cantidad de otros empleados: ' + total_otros + '<br>');
+    </script>
+</body>
+</html>
